@@ -1,104 +1,94 @@
-📘 Genetic Prediction Model for Early-Onset POAG using Whole-Exome Sequencing and Machine Learning
+# Genetic Prediction Model for Early-Onset POAG using Whole-Exome Sequencing and Machine Learning
 
 This repository contains the Jupyter Notebook and related resources for the study:
 
-"Pinpointing Pathogenic Genetic Variants in Early-Onset POAG via Whole Exome Sequencing and Machine Learning Prediction"
+**"Pinpointing Pathogenic Genetic Variants in Early-Onset POAG via Whole Exome Sequencing and Machine Learning Prediction"**
 
-🧬 Background
+---
 
-Primary open-angle glaucoma (POAG) is the second leading cause of irreversible blindness worldwide.
-While most genetic studies emphasize late-onset POAG, early-onset POAG (EOG) demonstrates stronger heritability and higher penetrance.
+## Background
+Primary open-angle glaucoma (POAG) is the **second leading cause of irreversible blindness** worldwide.  
+Most studies emphasize **late-onset POAG**, while **early-onset POAG (EOG)** shows stronger heritability and higher penetrance.
 
-To address this gap, we developed a family-based machine learning framework, trained on 19 two-generation familial EOG pedigrees, validated on sporadic early-onset cases, and tested against independent controls and external datasets.
+We developed a **family-based machine learning framework**:
+- **Training** on 19 two-generation familial EOG pedigrees
+- **Validation** on sporadic early-onset cases
+- **Testing** against independent controls and extended datasets
 
-🛠️ Methodology
+---
 
-Variant Filtering
+## Methodology
 
-Whole-exome sequencing (WES) data from 19 EOG families and sporadic cases.
+### 1. Variant Filtering
+- Whole-exome sequencing (WES) from 19 families and sporadic cases  
+- Filters: **family frequency >0.2, sporadic >0.2, controls <0.6, CADD >5**  
+- Final panel: **3,054 exonic SNPs**
 
-Filters applied: familial frequency >0.2, sporadic frequency >0.2, control frequency <0.6, CADD >5.
+### 2. Dataset Partitioning
 
-Result: 3,054 prioritized exonic SNPs.
+| Dataset      | Composition                                                                 | Sample Size (n) |
+|--------------|------------------------------------------------------------------------------|-----------------|
+| Training     | 46 familial cases (24 FE, 22 FL) + 36 controls (12 family controls, 10 elderly, 14 TWB) | 82 |
+| Validation   | 18 sporadic early-onset (SE) + 11 TWB controls (randomly allocated)          | 29 |
+| Testing      | Remaining 18 SE + 11 TWB controls (independent of validation)                | 29 |
+| Extended     | 6 sporadic late-onset (SL) + 21 TWB late-onset + 10 suspects                 | 37 |
 
-Data Partitioning
+**Random Allocation Principles**
+- Familial samples restricted to **Training only** → prevents data leakage via kinship  
+- SE and TWB controls randomly assigned to **Validation** or **Testing** in each iteration  
+- **Validation** used only for feature ranking & model selection  
+- **Testing** used only for final performance evaluation  
+- Entire process repeated **500 Monte Carlo iterations** for robustness
 
-Training Set (n=82): 46 familial cases (24 FE, 22 FL) + 36 controls (unaffected relatives, elderly, TWB).
+### 3. Feature Ranking
+- Random Forest classifier applied on **Validation set**  
+- Importance measured by **Gini impurity (mean decrease in impurity)**  
+- Each iteration: **200 repeats** → averaged for stability  
+- Aggregated across **500 iterations** → robust final SNP ranking
 
-Validation Set (n=29): 18 sporadic EOG (SE) cases + 11 TWB controls.
+### 4. Model Training & Evaluation
+- Trained on **Training set**, with feature count chosen via **Validation**  
+- Evaluated on **independent Testing set**  
+- **Extended dataset** assessed via probability distributions (not included in confusion matrices)  
+- Metrics: **Accuracy, Recall, Confusion Matrix, Probability Distributions**
 
-Testing Set (n=29): independent 18 SE cases + 11 TWB controls.
+---
 
-Extended Dataset (n=37): 6 sporadic late-onset (SL), 21 TWB late-onset, and 10 suspect individuals (for probability only).
+## Key Findings
+- Testing set performance (500 iterations):  
+  - **Accuracy = 0.946 (mean)**  
+  - **Recall = 0.912 (mean)**  
+  - **83/500 runs achieved 100% accuracy**
 
-Feature Ranking
+- **Predictive Probabilities**  
+  - Familial early-onset (FE): ~86%  
+  - Familial late-onset (FL): ~86%  
+  - Sporadic early-onset (SE): ~62%  
+  - Controls: ~25%  
+  - Sporadic late-onset (SL): ~35%  
+  - Suspects: ~66%
 
-Random Forest classifiers were trained on the validation set.
+- **Top 200 SNPs** converge on five biological mechanisms:  
+  1. Cilia biogenesis  
+  2. Mitochondrial dysfunction  
+  3. Hedgehog signaling  
+  4. Neurotrophic regulation  
+  5. Autophagy
 
-Feature importance calculated using mean decrease in impurity (Gini importance).
+---
 
-Each iteration: 200 repeated rankings → averaged for stability.
+## Files
+- `NC_ML_model.ipynb` – main notebook (preprocessing, feature ranking, model training, evaluation)  
+- Input File: 3054SNPs.csv
 
-Repeated across 500 Monte Carlo iterations to obtain robust SNP rankings.
+---
 
-Model Training and Evaluation
+## Data Availability
+- **Raw WES data not publicly available** (privacy regulations)  
+- Processed SNP matrices (**3,054 variants**) available upon reasonable request  
 
-Top 10–200 ranked SNPs were incrementally tested.
+---
 
-Best-performing feature count selected on validation.
-
-Final model trained on training set, evaluated on testing set, and assessed on extended dataset (probability only).
-
-Metrics: Accuracy, Recall, Confusion Matrix, Predictive Probability distributions.
-
-📈 Key Findings
-
-The validation-ranked SNP panel yielded stable high performance:
-
-Mean Accuracy = 0.946, Recall = 0.912 across 500 test iterations.
-
-83/500 runs achieved 100% accuracy.
-
-Predictive Probabilities:
-
-FE & FL cases: ~86%
-
-SE cases: ~62%
-
-Controls: ~25%
-
-SL cases: ~35% (heterogeneous)
-
-Suspects: ~66% (elevated risk despite being clinically unconfirmed)
-
-Pathway Enrichment: Top-ranked SNPs converged on 5 biological mechanisms:
-
-Cilia biogenesis
-
-Mitochondrial dysfunction
-
-Hedgehog signaling
-
-Neurotrophic regulation
-
-Autophagy
-
-📂 Files
-
-0826_Code.ipynb – Main notebook for preprocessing, feature ranking, model training, and evaluation.
-
-Supplementary plots and outputs (accuracy, recall curves, PCA, violin plots, SNP heatmaps).
-
-🔒 Data Availability
-
-Due to privacy regulations, raw WES data are not publicly available.
-Processed variant matrices (3,054 SNPs) may be shared upon reasonable request to the corresponding author.
-
-📬 Contact
-
-For inquiries, please contact:
-
-Hao-Chen Tseng (409030002@mail.ndmctsgh.edu.tw
-)
-
-Prof. Yu Chuan Huang (PI, NDMC)
+## Contact
+- **Hao-Chen Tseng** (409030002@mail.ndmctsgh.edu.tw)  
+- **Prof. Yu Chuan Huang (NDMC)**
