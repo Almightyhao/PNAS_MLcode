@@ -1,38 +1,104 @@
-# Genetic Prediction Model for Early-Onset POAG using Whole-Exome Sequencing and Machine Learning
+📘 Genetic Prediction Model for Early-Onset POAG using Whole-Exome Sequencing and Machine Learning
 
 This repository contains the Jupyter Notebook and related resources for the study:
 
-**"Pinpointing Pathogenic Genetic Variants in Early-Onset POAG via Whole Exome Sequencing and Machine Learning Prediction "**
+"Pinpointing Pathogenic Genetic Variants in Early-Onset POAG via Whole Exome Sequencing and Machine Learning Prediction"
 
-## 🧬 Background
+🧬 Background
 
-Primary open-angle glaucoma (POAG) is the second leading cause of irreversible blindness. Most genetic studies have focused on late-onset POAG, but early-onset cases (EOG) show stronger heritability and higher penetrance. To address this gap, we developed a machine learning framework trained on 18 familial EOG pedigrees and tested on 22 sporadic EOG cases.
+Primary open-angle glaucoma (POAG) is the second leading cause of irreversible blindness worldwide.
+While most genetic studies emphasize late-onset POAG, early-onset POAG (EOG) demonstrates stronger heritability and higher penetrance.
 
-## 🛠️ Methodology
+To address this gap, we developed a family-based machine learning framework, trained on 19 two-generation familial EOG pedigrees, validated on sporadic early-onset cases, and tested against independent controls and external datasets.
 
-- **Variant Filtering**: Whole-exome sequencing (WES) data were filtered based on family frequency, control exclusion, and functional annotation (CADD > 5).
-- **Feature Ranking**: 3,054 SNPs were prioritized using Random Forest importance scores.
-- **Model Building**: Logistic Regression and Random Forest models were trained on familial data and tested on sporadic and population-based controls (TWB).
-- **Evaluation**: Accuracy, recall, PCA projection, and predictive probabilities were used to assess model performance.
+🛠️ Methodology
 
-## 📈 Key Findings
+Variant Filtering
 
-- A 100-SNP panel achieved 100% accuracy and recall in predicting early-onset POAG.
-- Predictive probabilities were elevated in FE-, FL-, and SE-POAG subgroups, but significantly lower in late-onset and control groups.
+Whole-exome sequencing (WES) data from 19 EOG families and sporadic cases.
 
+Filters applied: familial frequency >0.2, sporadic frequency >0.2, control frequency <0.6, CADD >5.
 
-## 📂 Files
+Result: 3,054 prioritized exonic SNPs.
 
-- `0516NC_Code.ipynb`: Main notebook containing preprocessing, feature selection, modeling, and visualization.
+Data Partitioning
 
+Training Set (n=82): 46 familial cases (24 FE, 22 FL) + 36 controls (unaffected relatives, elderly, TWB).
 
+Validation Set (n=29): 18 sporadic EOG (SE) cases + 11 TWB controls.
 
+Testing Set (n=29): independent 18 SE cases + 11 TWB controls.
 
-## 🔒 Data Availability
+Extended Dataset (n=37): 6 sporadic late-onset (SL), 21 TWB late-onset, and 10 suspect individuals (for probability only).
 
-Due to privacy concerns, raw WES data are not publicly available. Processed variant data may be available upon reasonable request to the corresponding author.
+Feature Ranking
 
-## 📬 Contact
+Random Forest classifiers were trained on the validation set.
 
-For inquiries, please contact **Hao-Chen Tseng** (409030002@mail.ndmctsgh.edu.tw) or **Yu Chuan Huang** (PI, NDMC).
+Feature importance calculated using mean decrease in impurity (Gini importance).
 
+Each iteration: 200 repeated rankings → averaged for stability.
+
+Repeated across 500 Monte Carlo iterations to obtain robust SNP rankings.
+
+Model Training and Evaluation
+
+Top 10–200 ranked SNPs were incrementally tested.
+
+Best-performing feature count selected on validation.
+
+Final model trained on training set, evaluated on testing set, and assessed on extended dataset (probability only).
+
+Metrics: Accuracy, Recall, Confusion Matrix, Predictive Probability distributions.
+
+📈 Key Findings
+
+The validation-ranked SNP panel yielded stable high performance:
+
+Mean Accuracy = 0.946, Recall = 0.912 across 500 test iterations.
+
+83/500 runs achieved 100% accuracy.
+
+Predictive Probabilities:
+
+FE & FL cases: ~86%
+
+SE cases: ~62%
+
+Controls: ~25%
+
+SL cases: ~35% (heterogeneous)
+
+Suspects: ~66% (elevated risk despite being clinically unconfirmed)
+
+Pathway Enrichment: Top-ranked SNPs converged on 5 biological mechanisms:
+
+Cilia biogenesis
+
+Mitochondrial dysfunction
+
+Hedgehog signaling
+
+Neurotrophic regulation
+
+Autophagy
+
+📂 Files
+
+0826_Code.ipynb – Main notebook for preprocessing, feature ranking, model training, and evaluation.
+
+Supplementary plots and outputs (accuracy, recall curves, PCA, violin plots, SNP heatmaps).
+
+🔒 Data Availability
+
+Due to privacy regulations, raw WES data are not publicly available.
+Processed variant matrices (3,054 SNPs) may be shared upon reasonable request to the corresponding author.
+
+📬 Contact
+
+For inquiries, please contact:
+
+Hao-Chen Tseng (409030002@mail.ndmctsgh.edu.tw
+)
+
+Prof. Yu Chuan Huang (PI, NDMC)
