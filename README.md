@@ -79,7 +79,7 @@ We developed a **family-based machine learning framework**:
 
 ## Files
 - `NC_ML_model.ipynb` – main notebook (preprocessing, feature ranking, model training, evaluation)  
-- Input File: 3054SNPs.csv
+- Input File: 3054SNPs.csv or 3054SNPs.zip
 
 ---
 
