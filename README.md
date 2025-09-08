@@ -91,4 +91,4 @@ We developed a **family-based machine learning framework**:
 
 ## Contact
 - **Hao-Chen Tseng** (409030002@mail.ndmctsgh.edu.tw)  
-- **Prof. Yu Chuan Huang (NDMC)**
+- **Associate Prof. Yu Chuan Huang (NDMC)**
