@@ -13,7 +13,7 @@ Most studies emphasize **late-onset POAG**, while **early-onset POAG (EOG)** sho
 We developed a **family-based machine learning framework**:
 - **Training**: 19 two-generation familial EOG cases (FE + FL), split by family to prevent leakage.
 
-- **Validation**(feature ranking only): sporadic early-onset cases (SE) used in a blinded manner to derive SNP rankings; not used for model fitting.
+- **Validation** (feature ranking only): sporadic early-onset cases (SE) used in a blinded manner to derive SNP rankings; not used for model fitting.
 
 - **Testing**: an independent, never-seen case–control set. External “extra-test” cohorts — sporadic late-onset (SL), Taiwan Biobank late-onset, and “suspects” — are evaluated for probability outputs only and excluded from confusion-matrix metrics.
 
