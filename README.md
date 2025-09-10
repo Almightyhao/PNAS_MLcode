@@ -24,7 +24,7 @@ We developed a **family-based machine learning framework**:
 
 ### 1. Variant Filtering
 - Whole-exome sequencing (WES) from 19 families and sporadic cases  
-- Filters: **family frequency >0.2, sporadic >0.2, controls <0.6, CADD >5**  
+- Filters: **family frequency >0.2, sporadic early >0.2, controls <0.6, CADD >5**  
 - Final panel: **3,054 exonic SNPs**
 
 ### 2. Dataset Partitioning
