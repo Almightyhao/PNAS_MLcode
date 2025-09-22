@@ -11,8 +11,7 @@ Primary open-angle glaucoma (POAG) is the **second leading cause of irreversible
 Most studies emphasize **late-onset POAG**, while **early-onset POAG (EOG)** shows stronger heritability and higher penetrance.
 
 We developed a **family-based machine learning framework**:
-- **Training**: All familial samples (FE, FL, and FC) were restricted to the training set, with families kept intact to prevent kinship-related data leakage
-
+- **Training**: All familial samples (FE, FL, and FC) were restricted to the training set.
 - **Validation** (feature ranking only): sporadic early-onset cases (SE) used in a blinded manner to derive SNP rankings; not used for model fitting.
 
 - **Testing**: an independent, never-seen case–control set. External “extra-test” cohorts — sporadic late-onset (SL), Taiwan Biobank late-onset, and “suspects” — are evaluated for probability outputs only and excluded from confusion-matrix metrics.
