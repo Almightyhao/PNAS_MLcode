@@ -92,4 +92,4 @@ We developed a **family-based machine learning framework**:
 
 ## Contact
 - **Hao-Chen Tseng** (a0979615243@gmail.com)  
-- **Associate Prof. Yu Chuan Huang (National Defense Medical University)**
+- **Associate Prof. Yu Chuan Huang (yuh@mail.ndmctsgh.edu.tw , National Defense Medical University)**
