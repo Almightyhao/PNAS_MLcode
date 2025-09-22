@@ -81,8 +81,7 @@ We developed a **family-based machine learning framework**:
 
 ## Files
 - `NC_ML_model.ipynb` – main notebook (preprocessing, feature ranking, model training, evaluation)  
-- Input File: 3054SNPs.csv or 3054SNPs.zip
-
+- Input File: 3054SNPs.csv 
 ---
 
 ## Data Availability
@@ -92,5 +91,5 @@ We developed a **family-based machine learning framework**:
 ---
 
 ## Contact
-- **Hao-Chen Tseng** (409030002@mail.ndmctsgh.edu.tw)  
+- **Hao-Chen Tseng** (a0979615243@gmail.com)  
 - **Associate Prof. Yu Chuan Huang (National Defense Medical University)**
